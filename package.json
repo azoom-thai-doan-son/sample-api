@@ -8,15 +8,14 @@
   "scripts": {
     "prisma:migrate": "prisma migrate dev --schema=./node_modules/@azoom/db/prisma/schema.prisma",
     "prisma:generate": "prisma generate --schema=./node_modules/@azoom/db/prisma/schema.prisma",
-    "dev": "env $(grep -v '^#' .env) nodemon index.js --exec 'node --experimental-specifier-resolution=node --experimental-modules --experimental-json-modules --loader ./node_modules/@azoom/node-util/module-alias/loader.js'",
-    "start": "env $(grep -v '^#' .env) node --experimental-specifier-resolution=node --experimental-modules --experimental-json-modules --loader ./node_modules/@azoom/node-util/module-alias/loader.js index.js",
+    "dev": "env $(grep -v '^#' .env) nodemon index.js --exec 'node --experimental-specifier-resolution=node --experimental-modules --experimental-json-modules --loader ./helpers/module-alias/loader.js'",
+    "start": "env $(grep -v '^#' .env) node --experimental-specifier-resolution=node --experimental-modules --experimental-json-modules --loader ./helpers/module-alias/loader.js index.js",
     "lint": "eslint --ext .js --ignore-path .gitignore .",
     "prepare": "husky install",
     "delete-old-staging-tags": "git fetch --tags && git push origin --delete $(git tag -l 'staging-*') || true && git fetch origin --prune 'refs/tags/*:refs/tags/*'",
     "staging:deploy": "yarn delete-old-staging-tags && TAG=`echo staging-$(date +%Y%m%d-%H%M%S)` && git tag $TAG && git push origin $TAG"
   },
   "dependencies": {
-    "@azoom/node-util": "^1.1.1",
     "@prisma/client": "^4.10.1",
     "@sentry/node": "^7.14.1",
     "@sentry/tracing": "^7.14.1",
